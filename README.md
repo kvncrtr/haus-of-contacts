@@ -1,5 +1,8 @@
 # ADS Front End Developer Test – Address Book (AngularJS 1.8.3)
 
+## View Live
+- [Link to the application live](https://haus-of-contacts.netlify.app/)
+
 ## Run locally
 - Node: `http-server -p 5173 .` → http://localhost:5173
 
