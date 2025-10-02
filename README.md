@@ -1,7 +1,7 @@
 # ADS Front End Developer Test – Address Book (AngularJS 1.8.3)
 
 ## View Live
-- Packaged to send cleanly → [LINK](https://haus-of-contacts.netlify.app/)
+- Packaged to send cleanly → [haus-of-contacts.com](https://haus-of-contacts.netlify.app/)
 
 
 ## Run locally
