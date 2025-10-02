@@ -1,0 +1,139 @@
+<div class="container" ng-controller="ContactsController as vm">
+    <div class="toolbar">
+        <div class="btn-family">
+            <a href="#!/" class="btn">Table</a>
+            <a href="#!/cards" class="btn">Cards</a>
+        </div>
+
+        <input
+            class="search-input"
+            type="search"
+            placeholder="Search name, email, company…"
+            ng-model="vm.searchText"
+            ng-model-options="{ debounce: 250 }"
+        />
+    </div>
+
+    <div class="filters">
+        <div class="top">
+            <div class="filter--group">
+                <p class="filter--description">Country</p>
+                <select
+                    class="select"
+                    title="country"
+                    name="country"
+                    ng-model="vm.filters.country"
+                    ng-options="c as c for c in vm.facets.countries track by c"
+                    ng-change="vm.onCountryChange()"
+                >
+                    <option value="">All countries</option>
+                </select>
+            </div>
+
+            <div class="filter--group">
+                <p class="filter--description">City</p>
+                <select
+                    class="select"
+                    title="city"
+                    name="city"
+                    ng-model="vm.filters.city"
+                    ng-options="city for city in vm.facets.cities"
+                    ng-change="vm.onCityChange()"
+                >
+                    <option value="">All cities</option>
+                </select>
+            </div>
+
+            <div class="filter--group">
+                <p class="filter--description">Company</p>
+                <select
+                    class="select"
+                    title="company"
+                    name="company"
+                    ng-model="vm.filters.company"
+                    ng-options="com for com in vm.facets.companies"
+                    ng-change="vm.onCompanyChange()"
+                >
+                    <option value="">All companies</option>
+                </select>
+            </div>
+
+            <div class="filter--group">
+                <p class="filter--description">Title</p>
+                <select
+                    class="select"
+                    title="title"
+                    name="title"
+                    ng-model="vm.filters.title"
+                    ng-options="title for title in vm.facets.titles"
+                    ng-change="vm.onTitleChange()"
+                >
+                    <option value="">All titles</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="alphabet">
+            <button
+                type="button"
+                ng-repeat="L in vm.letters"
+                ng-class="{ active: vm.filters.startsWith === L}"
+                ng-click="vm.filters.startsWith = (vm.filters.startsWith===L ? '' : L)"
+            >
+                {{L}}
+            </button>
+        </div>
+    </div>
+
+    <div ng-if="vm.loading" class="status">Loading…</div>
+    <div ng-if="vm.error" class="status status--error">{{ vm.error }}</div>
+
+    <div ng-if="!vm.loading && !vm.error" class="card-grid">
+        <article
+            class="ab-card"
+            ng-repeat="c in vm.contacts | filter:vm.search"
+        >
+            <div class="ab-card__header">
+                <div class="avatar">
+                    {{ (c.firstName || '?')[0] }}{{ (c.lastName || '')[0] }}
+                </div>
+                <div>
+                    <h3 class="ab-card__name">
+                        {{ c.firstName }} {{ c.lastName }}
+                    </h3>
+                    <div class="ab-card__title">
+                        {{ c.title || '—' }} · {{ c.company || '—' }}
+                    </div>
+                </div>
+            </div>
+
+            <ul class="ab-card__list">
+                <li ng-if="c.email">
+                    <a ng-href="mailto:{{c.email}}">{{ c.email }}</a>
+                </li>
+                <li ng-if="c.phone">
+                    <a ng-href="tel:{{c.phone}}">{{ c.phone }}</a>
+                </li>
+                <li ng-if="c.city || c.country">
+                    {{ c.city }}{{ c.city && c.country ? ', ' : '' }}{{
+                    c.country }}
+                </li>
+            </ul>
+
+            <div class="ab-card__actions">
+                <a
+                    class="btn btn--ghost"
+                    ng-if="c.email"
+                    ng-href="mailto:{{c.email}}"
+                    >Email</a
+                >
+                <a
+                    class="btn btn--ghost"
+                    ng-if="c.phone"
+                    ng-href="tel:{{c.phone}}"
+                    >Call</a
+                >
+            </div>
+        </article>
+    </div>
+</div>

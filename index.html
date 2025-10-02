@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="abApp">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <title>Haus Of Contacts</title>
+    </head>
+    <body>
+        <div class="heading--container">
+            <h1 class="heading">Haus of Contacts</h1>
+        </div>
+        
+        <div ng-view></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
+        <script src="app.js"></script>
+        <script src="services/contacts.service.js"></script>
+        <script src="controllers/contacts.controller.js"></script>
+    </body>
+</html>
